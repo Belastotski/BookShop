@@ -1,0 +1,53 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    margin: auto;
+    max-width: 1200px;
+    width: 80vw;
+    height: 100%;
+    border: 1px solid #f90303;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 10vw;
+    max-height: 200px;
+    min-height: 200px;
+}
+.title {
+    letter-spacing: .2em;
+    & > div {
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.bag {
+    width: 20vw;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f90303;
+    background-image: url('../assets/bag.svg');
+    background-position: center;
+    background-size: 30%;
+    background-repeat: no-repeat;
+}
