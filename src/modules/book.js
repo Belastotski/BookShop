@@ -2,37 +2,31 @@ export default class Book extends HTMLElement {
 
     constructor(){
         super();
-    }
-
-    connectedCallback(){
-        this.render();
-    }
-
-
-    render(){
-        // const shadow = this.attachShadow({mode:'open'});
-        const shadow = this;
-        shadow.className = 'host';
+        this.shadow = this.attachShadow({mode:'open'});
+        if (!this._style) this._style = document.createElement('style');
+        this._style.innerHTML = `@import "./src/modules/book.css"`;
         if (!this.content) this.content = this.createElement('div' , 'content');
         if (!this.img) this.img = this.createElement('div', 'img');
         if (!this._title) this._title = this.createElement('h2', 'title');
         if (!this.author) this.author = this.createElement('h4' , 'author');
         if (!this.price) this.price = this.createElement('div', 'price');
-        if (!this.count) this.count = this.createElement('div', 'count');
+        if (!this._count) this._count = this.createElement('div', 'count');
         if (!this.buttonsPanel) this.buttonsPanel = this.createElement('div', 'buttons-panel');
         if (!this.btn1) this.btn1 = this.createElement('button','btn', 'btn1');
         if (!this.btn2) this.btn2 = this.createElement('button', 'btn','btn2');
         this.btn1.innerHTML = 'Show more';
         this.btn2.innerHTML = 'Add to bag';
-        this.buttonsPanel.append(this.btn1);
-        this.buttonsPanel.append(this.btn2);
-        this.content.append(this.author);
-        this.content.append(this._title);
-        this.content.append(this.price);
-        this.content.append(this.count);
-        this.content.append(this.buttonsPanel);
-        shadow.append(this.img);
-        shadow.append(this.content);
+        this.buttonsPanel.append(this.btn1,this.btn2);
+        this.content.append(this.author,this._title,this.price,this._count,this.buttonsPanel);
+    }
+
+    connectedCallback(){
+    }
+
+
+    render(){
+        this.shadow.innerHTML = '';
+        this.shadow.append(this._style,this.img,this.content);
     }
 
     createElement(tag, ...classes) {
@@ -47,9 +41,13 @@ export default class Book extends HTMLElement {
         this._title.innerHTML = title;
 
         this.author.innerHTML = author;
-        this.price.innerHTML = `price: ${price}`;
+        this.price.innerHTML = `price: $${price}`;
         return this;
     } 
+
+    set count(val) {
+        this._count.innerHTML =  val > 1?  `quantity: ${val} pcs` : '';
+    }
 
 
 }

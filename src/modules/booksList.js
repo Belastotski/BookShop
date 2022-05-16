@@ -29,11 +29,14 @@ export default class BooksList extends HTMLElement {
     }
 
     render(){
-        if (!this.title) this.title = 'Books List';
+        if (!this._title) this._title = 'Books List';
         this.innerHTML = '';
-        const title = this.createElement('h2', 'list-title');
-        title.innerHTML = this.title;
-        title.className = 'list-title';
+        let title;
+        if (typeof this._title === 'object' ) title = this._title
+        else {
+            title = this.createElement('h2', 'list-title');
+            title.innerHTML = this._title;
+        }
         this.append(title);
         if (!this.list.size) {
             const info = this.createElement('h3', 'list-info');

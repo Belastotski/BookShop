@@ -1,0 +1,129 @@
+<form id="form" action="" method="get">
+  <fieldset id="form-set">
+    <legend>
+      <h2 id="title">Delivery form</h2>
+    </legend>
+    <fieldset class="summary-set">
+      <legend>Summary</legend>
+      <div class="books-container">
+        <div>Books:&nbsp</div> <div id="books"></div>
+      </div>
+      <div id="price">Total price:</div>
+    </fieldset>
+    <fieldset>
+      <legend>Personal information</legend>
+      <label>
+        Name:
+        <input
+          type="text"
+          class="name"
+          name="name"
+          pattern="[A-Za-zА-Яа-яЁё]{4,}"
+          title="Minimum 4 letters"
+          placeholder="* Name"
+          required
+        />
+      </label>
+      <label>
+        Surname:
+        <input
+          type="text"
+          class="name"
+          name="surname"
+          pattern="[A-Za-zА-Яа-яЁё]{5,}"
+          title="Minimum 5 letters"
+          placeholder="* Surname"
+          required
+        />
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Delivery date</legend>
+      <input
+        id="date"
+        type="date"
+        class="date"
+        name="date"
+        title="Minimum 5 letters"
+        required
+      />
+    </fieldset>
+    <fieldset class="address">
+      <legend>Address</legend>
+      <label>
+        Street:
+        <input
+          type="text"
+          class="street"
+          name="street"
+          minlength="5"
+          title="Minimum 5 simbols"
+          placeholder="* Surname"
+          required
+        />
+      </label>
+      <label>
+        House number:
+        <input
+          type="number"
+          class="house"
+          name="house"
+          min="0"
+          title="Positive numbers only"
+          placeholder="* House number"
+          required
+        />
+      </label>
+      <label>
+        Flat number:
+        <input
+          type="text"
+          class="house"
+          name="house"
+          pattern="^([0-9])([0-9-])*"
+          title="Positive numbers only and the dash symbol"
+          placeholder="* Flat number"
+          required
+        />
+      </label>
+    </fieldset>
+    <fieldset class="payment-set">
+      <legend>Payment</legend>
+      <label
+        >Card:
+        <input
+          type="radio"
+          class="payment"
+          name="payment"
+          value="card"
+          checked
+        />
+      </label>
+      <label
+        >Cash:
+        <input type="radio" value="cash" class="payment" name="payment" />
+      </label>
+    </fieldset>
+    <fieldset class="gift-set">
+      <legend>Gifts</legend>
+      <label
+        >Pack as a gift: <input type="checkbox" class="gift" name="gift" />
+      </label>
+      <label
+        >Add postcard: <input type="checkbox" class="gift" name="gift" />
+      </label>
+      <label
+        >Provide 2% discount to the next time:
+        <input type="checkbox" class="gift" name="gift" />
+      </label>
+      <label
+        >Branded pen or pencil:
+        <input type="checkbox" class="gift" name="gift" />
+      </label>
+    </fieldset>
+    <div class="wrapper-btn">
+      <button type="submit" class="submit btn">Complete</button>
+    </div>
+  </fieldset>
+  <hr />
+</form>
