@@ -43,11 +43,9 @@ export default class DeliveryForm extends HTMLElement {
     }
 
     hide() {
-        console.log(this.form)
-        
-        this.form.style.display = 'none';
+        this.form.classList.add('hide');
     }
     show() {
-        this.form.style.display = 'flex';
+        this.form.classList.remove('hide');
     }
 }

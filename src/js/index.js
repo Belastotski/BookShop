@@ -1,6 +1,7 @@
 import BooksList from '../modules/booksList.js'
 import Book from '../modules/book.js'
 import DeliveryForm from '../modules/deliveryform/deliveryForm.js'
+import {popShow, popHide, addBtnClose} from './pop.js';
 
 let booksArray = [];
 
@@ -36,7 +37,8 @@ booksArray.forEach( book => {
         bagList.add(book_.cloneNode(true));
     }
     book_.btn1.onclick = function(e){
-        alert(book_);
+        addBtnClose.apply(popShow.apply(book_),[popHide]);
+        
     }
     booksList.add(book_)
     book_.set(book);
@@ -47,10 +49,10 @@ booksList._title = form;
 wrapper.append(header);
 wrapper.append(booksList);
 
-setTimeout(() =>form.setPrice(50), 200);
-setTimeout(() =>form.setBooks('123','eee','fdsfdf'), 200);
-setTimeout(() =>form.hide(), 2000);
-setTimeout(() =>form.show(), 5000);
+// setTimeout(() =>form.setPrice(50), 200);
+// setTimeout(() =>form.setBooks('123','eee','fdsfdf'), 200);
+// setTimeout(() =>form.hide(), 2000);
+// setTimeout(() =>form.show(), 5000);
 
 
 

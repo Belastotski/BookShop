@@ -23,7 +23,6 @@ export default class Book extends HTMLElement {
     connectedCallback(){
     }
 
-
     render(){
         this.shadow.innerHTML = '';
         this.shadow.append(this._style,this.img,this.content);

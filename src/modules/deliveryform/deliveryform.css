@@ -111,4 +111,8 @@ fieldset {
 
 .books-container {
   display: flex;
+}
+
+.hide {
+  display: none !important;
 }/*# sourceMappingURL=deliveryform.css.map */

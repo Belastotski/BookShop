@@ -1,0 +1,120 @@
+    input{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgb(145, 145, 145);
+    }
+    
+    input:valid {
+        border-bottom: 2px solid rgba(0, 128, 0, .5);
+    }
+    
+    input:invalid {
+        border-bottom: 2px solid rgba(255, 0, 0, .5);
+    }
+    
+    input,
+    label {
+        display: inline-block;
+    }
+
+    .gift,
+    .payment {
+        display: inline-block;      
+    }
+    .gift-set label,
+    .payment-set label{
+        transition: all .5s;
+        border-bottom: 1px solid rgb(145, 145, 145);
+        cursor: pointer;
+        &:hover {
+            position: relative;
+            border-bottom: 2px solid rgb(200, 200, 255);
+    }
+    }
+    
+
+    .gift-set input:hover,
+    .payment-set input:hover{
+    cursor: pointer;
+    }
+    
+
+    fieldset {
+        display: flex;
+        justify-content: left;
+        gap: 2vw;
+        flex-wrap: wrap;
+        border: none;
+        border-top: 1px solid rgb(145, 145, 145);
+    }
+
+    #form-set {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .address {
+        justify-content: stretch;
+    }
+    .wrapper-btn {
+        border-radius: 10px;
+        border: none;
+        transition: all 0.3s;
+        position: relative;
+        align-self: flex-end;
+    }
+
+    #form:invalid  .wrapper-btn::before {
+        border-radius: 10px;
+        border: none;
+        transition: all 0.3s;
+        display: block;
+        position: absolute;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        content: ' ';
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    #form:invalid .btn {
+        color: rgb(145, 145, 145);
+    }
+
+    .summary-set{
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100px;
+        height: 25px;
+        cursor: pointer;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.3s;
+    }
+    .btn:hover {
+        background-color: rgb(200, 200, 255);
+    }
+    
+    .btn:active {
+        -webkit-box-shadow: inset 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: inset 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    box-shadow: inset 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    }
+
+    #books {
+        overflow-wrap: wrap;
+    }
+    .books-container {
+        display: flex;   
+    }
+
+    .hide {
+        display: none !important; 
+    }
+    
+    
+    

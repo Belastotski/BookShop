@@ -1,6 +1,7 @@
 body {
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 h1 {
@@ -15,6 +16,7 @@ h1 {
   width: 80vw;
   height: 100%;
   border: 1px solid #f90303;
+  position: relative;
 }
 
 .header {
@@ -61,4 +63,57 @@ h1 {
 .list-title {
   align-self: center;
   letter-spacing: 0.2em;
+}
+
+.pop {
+  margin: auto;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  left: 100%/1.9;
+  top: 100%/2;
+  width: 70%;
+  background-color: rgb(255, 255, 255);
+  padding: 2vw;
+}
+.pop .description {
+  margin: auto 0;
+}
+
+.back {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-close {
+  border-radius: 100%;
+  box-sizing: border-box;
+  border: 2px solid white;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0);
+  right: -16px;
+  top: -16px;
+}
+.btn-close:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.2s;
+}
+
+.hide {
+  display: none !important;
 }/*# sourceMappingURL=style.css.map */
