@@ -15,7 +15,6 @@ h1 {
   max-width: 1200px;
   width: 80vw;
   height: 100%;
-  border: 1px solid #f90303;
   position: relative;
 }
 
@@ -47,11 +46,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #f90303;
   background-image: url("../assets/bag.svg");
   background-position: center;
   background-size: 30%;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .books-list {
@@ -72,9 +71,9 @@ h1 {
   flex-direction: column;
   justify-content: center;
   position: fixed;
-  left: 100%/1.9;
-  top: 100%/2;
   width: 70%;
+  top: 40%;
+  left: 10%;
   background-color: rgb(255, 255, 255);
   padding: 2vw;
 }

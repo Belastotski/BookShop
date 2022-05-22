@@ -1,5 +1,10 @@
+import Book from '../modules/book.js'
+
 export default class BooksList extends HTMLElement {
 
+    constructor(){
+        super();
+    }
 
     connectedCallback(){
         if (this.list === undefined) this.list = new Map();
@@ -9,14 +14,20 @@ export default class BooksList extends HTMLElement {
 
     add(...node) {
         if (this.list === undefined) this.list = new Map();
-        node.forEach( el => this.list.set(el, this.list.has(el) ? this.list.get(el) + 1 : 1 ));
+        node.forEach( el => {
+            this.list.set(el, this.list.has(el) ? this.list.get(el) + 1 : 1 )
+        });
         this.render();
         return this;
     }
 
+    addElement(fn) {
+        this.additional = el;
+    } 
+
     del(node) {
         if (this.list.has(node)) {
-            count = this.list.get(node);
+            let count = this.list.get(node);
             if (count === 1) {
                 this.list.delete(node);
             } else this.list.set(node, count - 1);
@@ -43,7 +54,12 @@ export default class BooksList extends HTMLElement {
             info.textContent = 'list is empty';
             this.append(info); 
 
-        } else this.list.forEach((count,node) => this.append(node))
+        } else this.list.forEach((count,el) => {
+            const node = this.createElement('book-s');
+            console.log(el.addit);
+            node.set(el,count);
+            this.append(node)
+        });
     }
 
     createElement(tag, ...classes) {
@@ -51,6 +67,39 @@ export default class BooksList extends HTMLElement {
         if (classes.length) classes.forEach( el => node.classList.add(el));
         return node;
     }
+
+    size() {
+        let size = 0;
+        this.list.forEach((val) => size += val);
+        return size;
+    }
+
+    hide() {
+        this.classList.add('hide');
+    }
+    show() {
+        this.classList.remove('hide');
+        this.render();
+    }
+
+    isShown() {
+        return this.classList.contains('hide');
+    }
+
+    // has(val) {
+    //     let has = false;
+    //     this.list.forEach( (count, node) => {
+    //         if( node.isEqualNode(val) ) has = true;
+    //     }) 
+    //     return has;
+    // }
+    // get(val) {
+    //     let has = undefined;
+    //     this.list.forEach( (count, node) => {
+    //         if( node.isEqualNode(val) ) has = node;
+    //     }) 
+    //     return has;
+    // }
 
 
 }

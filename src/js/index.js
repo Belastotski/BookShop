@@ -1,5 +1,5 @@
-import BooksList from '../modules/booksList.js'
 import Book from '../modules/book.js'
+import BooksList from '../modules/booksList.js'
 import DeliveryForm from '../modules/deliveryform/deliveryForm.js'
 import {popShow, popHide, addBtnClose} from './pop.js';
 
@@ -12,9 +12,8 @@ await fetch('./books.json')
         .then(data => {
             booksArray = [...data];
         });
-
-customElements.define('books-list', BooksList);
 customElements.define('book-s', Book);
+customElements.define('books-list', BooksList);
 customElements.define('delivery-form', DeliveryForm);
 const wrapper = document.getElementById('app');
 wrapper.classList.add('wrapper');
@@ -29,25 +28,38 @@ header.className = 'header';
 const booksList = document.createElement('books-list');
 const bagList = document.createElement('books-list');
 const form = document.createElement('delivery-form');
-
-booksArray.forEach( book => {
-    const book_ = document.createElement('book-s');
-    book_.btn2.onclick = function(e){
-        book_.btn2.onclick = '';
-        bagList.add(book_.cloneNode(true));
-    }
-    book_.btn1.onclick = function(e){
-        addBtnClose.apply(popShow.apply(book_),[popHide]);
-        
-    }
-    booksList.add(book_)
-    book_.set(book);
+bag.addEventListener('click', (e) => {
+    if ( !(+bag.innerHTML) && bagList.isShown()) return;
+    booksList.hide();
+    bagList.show();
 })
 
-booksList._title = form;
+booksArray.forEach( book => {
+    book.btn2 =  function(e) {
+    book.addit = 'Remove';
+    book.btn2 = function(e) {
+        bagList.del(book);
+    }
+    bagList.add(book);
+    bag.innerHTML = bagList.size();
+    }
+    book.btn1 = function(e){
+        const pop = popShow(book, e.clientX, e.clientY);
+        addBtnClose.apply(pop ,[popHide]);
+        
+    }
+    booksList.add(book);
+
+
+})
+
+bagList._title = 'Bags';
 
 wrapper.append(header);
+wrapper.append(form);
 wrapper.append(booksList);
+wrapper.append(bagList);
+bagList.hide();
 
 // setTimeout(() =>form.setPrice(50), 200);
 // setTimeout(() =>form.setBooks('123','eee','fdsfdf'), 200);

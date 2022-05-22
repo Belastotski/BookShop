@@ -1,14 +1,16 @@
-export  function popShow() {
+export  function popShow(el) {
         const back = createElement('div','back');
         const popup = createElement('div','pop');
         const desc = createElement('div','description');
-        desc.innerHTML = this.description || 'no description';
-        popup.append(this._title.cloneNode(true), desc);
+        const title = createElement('h2','title');
+        desc.innerHTML = el.description || 'no description';
+        title.textContent = el.title || 'no title';
+        popup.append(title, desc);
         const bd = document.querySelector('body');
         bd.style.overflow = 'hidden';
         bd.append(back);
         back.addEventListener('click', popHide)
-        this.parentNode.append(popup);
+        bd.append(popup);
         return popup;
 }
 

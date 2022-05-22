@@ -66,4 +66,25 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 70vw;
+}
+
+.btn-close {
+  border-radius: 100%;
+  box-sizing: border-box;
+  border: 2px solid white;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0);
+  right: -16px;
+  top: -16px;
+}
+.btn-close:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.2s;
 }/*# sourceMappingURL=book.css.map */

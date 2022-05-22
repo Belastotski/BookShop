@@ -15,7 +15,7 @@ export default class Book extends HTMLElement {
         if (!this.btn1) this.btn1 = this.createElement('button','btn', 'btn1');
         if (!this.btn2) this.btn2 = this.createElement('button', 'btn','btn2');
         this.btn1.innerHTML = 'Show more';
-        this.btn2.innerHTML = 'Add to bag';
+        this.btn2.innerHTML = this.addit || 'Add to bag';
         this.buttonsPanel.append(this.btn1,this.btn2);
         this.content.append(this.author,this._title,this.price,this._count,this.buttonsPanel);
     }
@@ -25,6 +25,10 @@ export default class Book extends HTMLElement {
 
     render(){
         this.shadow.innerHTML = '';
+        if (this.addit) {
+            this.btn2.innerHTML = this.addit;
+    }
+        this._count.innerHTML = this.count > 1? this.count : '';
         this.shadow.append(this._style,this.img,this.content);
     }
 
@@ -33,14 +37,19 @@ export default class Book extends HTMLElement {
         if (classes.length) classes.forEach( el => node.classList.add(el));
         return node;
     }
-    set({imageLink, title, description, author, price}) {
+    set({imageLink, title, description, author, price, btn1 , btn2, addit}, count) {
         this.render();
         this.description = description;
         this.img.style.backgroundImage = `url('${imageLink}')`;
         this._title.innerHTML = title;
-
+        this.title = title;
         this.author.innerHTML = author;
+        this.count = count || 1;
         this.price.innerHTML = `price: $${price}`;
+        this.btn1.onclick = btn1;
+        this.btn2.onclick = btn2;
+        this.addit = addit;
+        this.render();
         return this;
     } 
 
