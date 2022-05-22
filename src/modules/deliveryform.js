@@ -3,8 +3,8 @@ export default class DeliveryForm extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         const _style = document.createElement('style');
-        _style.innerHTML = '@import "./src/modules/deliveryform/deliveryform.css"'
-        fetch('./src/modules/deliveryform/deliveryform.html')
+        _style.innerHTML = '@import "./src/modules/deliveryform.css"'
+        fetch('./src/modules/deliveryform.html')
         .then(response => {
             return response.text();
         })
