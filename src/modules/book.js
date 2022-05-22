@@ -28,7 +28,7 @@ export default class Book extends HTMLElement {
         if (this.addit) {
             this.btn2.innerHTML = this.addit;
     }
-        this._count.innerHTML = this.count > 1? this.count : '';
+        this._count.innerHTML = this.cnt > 1? `quantity: ${this.cnt} pcs` : '';
         this.shadow.append(this._style,this.img,this.content);
     }
 
@@ -44,7 +44,7 @@ export default class Book extends HTMLElement {
         this._title.innerHTML = title;
         this.title = title;
         this.author.innerHTML = author;
-        this.count = count || 1;
+        this.cnt = count || 1;
         this.price.innerHTML = `price: $${price}`;
         this.btn1.onclick = btn1;
         this.btn2.onclick = btn2;
@@ -52,10 +52,5 @@ export default class Book extends HTMLElement {
         this.render();
         return this;
     } 
-
-    set count(val) {
-        this._count.innerHTML =  val > 1?  `quantity: ${val} pcs` : '';
-    }
-
 
 }

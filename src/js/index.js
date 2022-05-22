@@ -2,6 +2,7 @@ import Book from '../modules/book.js'
 import BooksList from '../modules/booksList.js'
 import DeliveryForm from '../modules/deliveryform/deliveryForm.js'
 import {popShow, popHide, addBtnClose} from './pop.js';
+// import {Switcher} from '../modules/command.js';
 
 let booksArray = [];
 
@@ -28,19 +29,28 @@ header.className = 'header';
 const booksList = document.createElement('books-list');
 const bagList = document.createElement('books-list');
 const form = document.createElement('delivery-form');
+
 bag.addEventListener('click', (e) => {
     if ( !(+bag.innerHTML) && bagList.isShown()) return;
     booksList.hide();
     bagList.show();
+    form.hide();
+})
+title.addEventListener('click', (e) => { 
+    booksList.show();
+    bagList.hide();
+    form.hide();
 })
 
 booksArray.forEach( book => {
     book.btn2 =  function(e) {
-    book.addit = 'Remove';
-    book.btn2 = function(e) {
-        bagList.del(book);
+    const newBook = Object.assign({}, book);
+    newBook.addit = 'Remove';
+    newBook.btn2 = function(e) {
+        bagList.del(newBook);
+        bag.innerHTML = bagList.size();
     }
-    bagList.add(book);
+    bagList.add(newBook);
     bag.innerHTML = bagList.size();
     }
     book.btn1 = function(e){
@@ -49,11 +59,33 @@ booksArray.forEach( book => {
         
     }
     booksList.add(book);
-
-
 })
 
-bagList._title = 'Bags';
+bagList.setTitle(() => {
+
+    const panel = document.createElement('div');
+    panel.className = 'title-panel';
+    const desc = document.createElement('div');
+    desc.className = 'title-desc';
+    const sum = bagList.sum((c,o) =>c * o.price);
+    desc.innerHTML = `Bags. Total: $${sum}`;
+    panel.append(desc);
+    if (bagList.size()) {
+        const submitBtn = document.createElement('button');
+        submitBtn.classList.add('btn');
+        submitBtn.textContent = 'Confirm';
+        panel.append(submitBtn);
+        submitBtn.addEventListener('click', () => {
+            booksList.hide();
+            bagList.hide();
+            const books = [...bagList.list.keys()].map(book => `${book.title} x${bagList.list.get(book)}`);
+            form.show(sum,...books);
+        })
+        }
+    return panel;
+})
+
+
 
 wrapper.append(header);
 wrapper.append(form);

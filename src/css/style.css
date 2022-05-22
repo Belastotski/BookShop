@@ -115,4 +115,32 @@ h1 {
 
 .hide {
   display: none !important;
+}
+
+.btn {
+  width: 100px;
+  height: 25px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background-color: rgb(200, 200, 255);
+}
+
+.btn:active {
+  box-shadow: inset 8px 8px 24px 0px rgb(66, 68, 90);
+}
+
+.title-panel {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title-desc {
+  font-size: 2em;
 }/*# sourceMappingURL=style.css.map */

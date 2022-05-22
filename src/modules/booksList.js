@@ -15,7 +15,8 @@ export default class BooksList extends HTMLElement {
     add(...node) {
         if (this.list === undefined) this.list = new Map();
         node.forEach( el => {
-            this.list.set(el, this.list.has(el) ? this.list.get(el) + 1 : 1 )
+            if (this.has(el)) el = this.get(el); 
+            this.list.set(el, this.has(el) ? this.list.get(el) + 1 : 1 )
         });
         this.render();
         return this;
@@ -24,6 +25,8 @@ export default class BooksList extends HTMLElement {
     addElement(fn) {
         this.additional = el;
     } 
+
+    
 
     del(node) {
         if (this.list.has(node)) {
@@ -43,12 +46,13 @@ export default class BooksList extends HTMLElement {
         if (!this._title) this._title = 'Books List';
         this.innerHTML = '';
         let title;
-        if (typeof this._title === 'object' ) title = this._title
+        if (typeof this._title === 'function' ) title = this._title();
         else {
             title = this.createElement('h2', 'list-title');
             title.innerHTML = this._title;
         }
         this.append(title);
+
         if (!this.list.size) {
             const info = this.createElement('h3', 'list-info');
             info.textContent = 'list is empty';
@@ -56,7 +60,6 @@ export default class BooksList extends HTMLElement {
 
         } else this.list.forEach((count,el) => {
             const node = this.createElement('book-s');
-            console.log(el.addit);
             node.set(el,count);
             this.append(node)
         });
@@ -86,20 +89,32 @@ export default class BooksList extends HTMLElement {
         return this.classList.contains('hide');
     }
 
-    // has(val) {
-    //     let has = false;
-    //     this.list.forEach( (count, node) => {
-    //         if( node.isEqualNode(val) ) has = true;
-    //     }) 
-    //     return has;
-    // }
-    // get(val) {
-    //     let has = undefined;
-    //     this.list.forEach( (count, node) => {
-    //         if( node.isEqualNode(val) ) has = node;
-    //     }) 
-    //     return has;
-    // }
+    has(val) {
+        let has = false;
+        this.list.forEach( (count, node) => {
+            if(this.isEqual(val,node) ) has = true;
+        }) 
+        return has;
+    }
+    get(val) {
+        let has = undefined;
+        this.list.forEach( (count, node) => {
+            if( this.isEqual(val,node) ) has = node;
+        }) 
+        return has;
+    }
+    isEqual(book1, book2) {
+        return JSON.stringify(book1) === JSON.stringify(book2);
+    }
 
+    sum(fn) {
+        let sum = 0;
+        this.list?.forEach( (count, node) => sum += fn(count, node));
+        return sum;
+    }
+
+    setTitle(fn) {
+        this._title = fn;
+    }
 
 }

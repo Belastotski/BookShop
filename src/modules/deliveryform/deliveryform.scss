@@ -106,6 +106,8 @@
     }
 
     #books {
+        display: flex;
+        flex-direction: column;
         overflow-wrap: wrap;
     }
     .books-container {

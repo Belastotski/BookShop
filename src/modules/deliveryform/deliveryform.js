@@ -35,7 +35,9 @@ export default class DeliveryForm extends HTMLElement {
 
     setBooks(...books) {
         this.books = [...books];
-        this.shadow.getElementById('books').innerText = '   ' + this.books.join(', ');
+        const book = this.shadow.getElementById('books');
+        book.innerHTML = '';
+        books.forEach(el => book.innerHTML += `<span>${el}</span>`);
     }
     setPrice(p) {
         this.price = p;
@@ -45,7 +47,10 @@ export default class DeliveryForm extends HTMLElement {
     hide() {
         this.form.classList.add('hide');
     }
-    show() {
+    show(total, ...books) {
         this.form.classList.remove('hide');
+        if (books.length) this.setBooks(...books);
+        if (total) this.setPrice(total);
+
     }
 }
