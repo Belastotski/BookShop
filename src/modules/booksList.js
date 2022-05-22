@@ -62,6 +62,12 @@ export default class BooksList extends HTMLElement {
             const node = this.createElement('book-s');
             node.set(el,count);
             node.setAttribute('draggable',this.drag || "false");
+            if (this.drag) {
+                node.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('book', JSON.stringify(el));
+                    e.dataTransfer.dropEffect = "copy";
+                })
+            }
             this.append(node)
         });
     }

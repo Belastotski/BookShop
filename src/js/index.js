@@ -5,7 +5,6 @@ import {popShow, popHide, addBtnClose} from './pop.js';
 import {createElement} from '../modules/command.js';
 
 let booksArray = [];
-
 await fetch('./books.json')
         .then(response => {
             return response.json();
@@ -23,6 +22,23 @@ const header = createElement('div','header');
 const title = createElement('div','title');
 title.innerHTML = `<div><h1> Book Shop </h1> Best book shop</div>`;
 const bag = createElement('div','bag');
+bag.addEventListener('drop', e => {
+    e.preventDefault();
+    const book = e.dataTransfer.getData("book");
+        const newBook =  JSON.parse(book);
+        newBook.addit = 'Remove';
+        newBook.btn2 = function(e) {
+            bagList.del(newBook);
+            bag.innerHTML = bagList.size();
+        }
+        bagList.add(newBook);
+        bag.innerHTML = bagList.size();
+    
+})
+bag.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move"
+})
 header.append(title,bag);
 const booksList = document.createElement('books-list');
 const bagList = document.createElement('books-list');
@@ -61,7 +77,6 @@ booksArray.forEach( book => {
 
 booksList.draggable();
 bagList.setTitle(() => {
-
     const panel = createElement('div','title-panel');
     const desc = createElement('div', 'title-desc');
     const sum = bagList.sum((c,o) =>c * o.price);
@@ -80,8 +95,6 @@ bagList.setTitle(() => {
         }
     return panel;
 })
-
-
 
 wrapper.append(header);
 wrapper.append(form);
