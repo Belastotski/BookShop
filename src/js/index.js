@@ -96,12 +96,14 @@ bagList.setTitle(() => {
     return panel;
 })
 
+let fragment = document.createDocumentFragment();
 wrapper.append(header);
 wrapper.append(form);
 wrapper.append(booksList);
 wrapper.append(bagList);
+fragment.append(wrapper);
 bagList.hide();
-body.append(wrapper);
+body.append(fragment);
 
 
 
