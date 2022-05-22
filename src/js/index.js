@@ -2,7 +2,7 @@ import Book from '../modules/book.js'
 import BooksList from '../modules/booksList.js'
 import DeliveryForm from '../modules/deliveryform/deliveryForm.js'
 import {popShow, popHide, addBtnClose} from './pop.js';
-// import {Switcher} from '../modules/command.js';
+import {createElement} from '../modules/command.js';
 
 let booksArray = [];
 
@@ -16,16 +16,14 @@ await fetch('./books.json')
 customElements.define('book-s', Book);
 customElements.define('books-list', BooksList);
 customElements.define('delivery-form', DeliveryForm);
-const wrapper = document.getElementById('app');
-wrapper.classList.add('wrapper');
-const header = document.createElement('div');
-const title = document.createElement('div');
+const body = document.querySelector('body');
+const wrapper = createElement('main','wrapper');
+wrapper.id = 'add';
+const header = createElement('div','header');
+const title = createElement('div','title');
 title.innerHTML = `<div><h1> Book Shop </h1> Best book shop</div>`;
-title.className = 'title';
-const bag = document.createElement('div');
-bag.className = 'bag'; 
+const bag = createElement('div','bag');
 header.append(title,bag);
-header.className = 'header';
 const booksList = document.createElement('books-list');
 const bagList = document.createElement('books-list');
 const form = document.createElement('delivery-form');
@@ -61,18 +59,16 @@ booksArray.forEach( book => {
     booksList.add(book);
 })
 
+booksList.draggable();
 bagList.setTitle(() => {
 
-    const panel = document.createElement('div');
-    panel.className = 'title-panel';
-    const desc = document.createElement('div');
-    desc.className = 'title-desc';
+    const panel = createElement('div','title-panel');
+    const desc = createElement('div', 'title-desc');
     const sum = bagList.sum((c,o) =>c * o.price);
     desc.innerHTML = `Bags. Total: $${sum}`;
     panel.append(desc);
     if (bagList.size()) {
-        const submitBtn = document.createElement('button');
-        submitBtn.classList.add('btn');
+        const submitBtn = createElement('button','btn');
         submitBtn.textContent = 'Confirm';
         panel.append(submitBtn);
         submitBtn.addEventListener('click', () => {
@@ -92,11 +88,9 @@ wrapper.append(form);
 wrapper.append(booksList);
 wrapper.append(bagList);
 bagList.hide();
+body.append(wrapper);
 
-// setTimeout(() =>form.setPrice(50), 200);
-// setTimeout(() =>form.setBooks('123','eee','fdsfdf'), 200);
-// setTimeout(() =>form.hide(), 2000);
-// setTimeout(() =>form.show(), 5000);
+
 
 
 

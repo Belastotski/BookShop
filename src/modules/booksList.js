@@ -61,6 +61,7 @@ export default class BooksList extends HTMLElement {
         } else this.list.forEach((count,el) => {
             const node = this.createElement('book-s');
             node.set(el,count);
+            node.setAttribute('draggable',this.drag || "false");
             this.append(node)
         });
     }
@@ -115,6 +116,11 @@ export default class BooksList extends HTMLElement {
 
     setTitle(fn) {
         this._title = fn;
+    }
+
+    draggable(val=true) {
+        this.drag = val;
+        this.render();
     }
 
 }
