@@ -97,13 +97,10 @@ bagList.setTitle(() => {
 })
 
 let fragment = document.createDocumentFragment();
-wrapper.append(header);
-wrapper.append(form);
-wrapper.append(booksList);
-wrapper.append(bagList);
+wrapper.append(header,form,booksList,bagList);
 fragment.append(wrapper);
-bagList.hide();
 body.append(fragment);
+bagList.hide();
 
 
 
