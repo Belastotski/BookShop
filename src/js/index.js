@@ -1,6 +1,6 @@
 import Book from '../modules/book.js'
 import BooksList from '../modules/booksList.js'
-import DeliveryForm from '../modules/deliveryForm.js'
+import DeliveryForm from '../modules/deliveryform.js'
 import {popShow, popHide, addBtnClose} from './pop.js';
 import {createElement} from '../modules/command.js';
 
