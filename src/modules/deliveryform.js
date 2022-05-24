@@ -17,6 +17,20 @@ export default class DeliveryForm extends HTMLElement {
             this.date.valueAsDate = _date;
             this.date.min = `${_date.getFullYear()}-${_date.getMonth() + 1 < 10 ? '0' + (_date.getMonth() + 1) : (_date.getMonth() + 1)}-${_date.getDate()}`;
             this.form = this.shadow.getElementById('form');
+            this.data = this.shadow.querySelectorAll('input[type="text"],input[type="number"],input[type="date"]');
+            this.form.addEventListener('submit', e=> {
+                e.preventDefault();
+                const dMap = new Map();
+                this.data.forEach( el => dMap.set(el.name, el.value))
+                const { name, surname, street, flat, house, date } = Object.fromEntries(dMap.entries());
+                const result = confirm(`
+                The order has been completed.
+                Сustomer: ${name} ${surname}
+                Address: ${street} st., house: ${house}, flat: ${flat}
+                Delivery date: ${date}
+                `);
+                if (result) this.form.submit();
+            })
             let gifts = this.shadow.querySelectorAll('.gift');
             gifts.forEach( el => {
                 el.onchange = (e) => {
